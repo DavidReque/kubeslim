@@ -1,4 +1,4 @@
-package slim
+package kubeslim
 
 import (
 	"context"

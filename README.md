@@ -1,21 +1,22 @@
 # kube-slim
 
-_kube-slim is a Kubernetes client library for Go optimized for runtime performance and final binary size_
+_kube-slim is an alternative to Kubernetes client-go optimized for binary size, memory consumption and speed_
 
-<img width="217" height="317" alt="gopher-slim" src="https://github.com/user-attachments/assets/76a56ea2-652e-41d8-b60d-c768ba35d520" />
-
+<img width="239" height="349" alt="gopher-slim" src="https://github.com/user-attachments/assets/76a56ea2-652e-41d8-b60d-c768ba35d520" />
 
 ## Introduction
 
-While working on the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool we noticed that our final binary size and that of other tools in the K8s ecosystem (e.g. `kubectl`, `helm`) was large compared to other unix utilities and we traced the problem to the [Kubernetes client-go library](https://github.com/amorey/size-matters) which typically adds 20MB+ to final binaries. We also noticed other issues with `client-go` such as large memory consumption with informers. This library is an attempt to fix those issues by starting fresh and designing a library that's optimized for speed, memory consumption and binary size.
+**kube-slim** is a Go library designed as a lightweight, performant alternative to Kubernetes [client-go](https://github.com/kubernetes/client-go). While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the [Kubernetes client-go library](https://github.com/amorey/size-matters), which typically adds 20MB+ to final binaries. We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
 
-Currently here's the typical binary size for a simple Golang executable with `client-go.Clientset` compared to `kube-slim`:
+| Client | Binary Size |
+|---|---|
+| `client-go.Clientset` | 38 MB |
+| `client-go.DynamicClient` | 16 MB |
+| **`kube-slim`** | **10 MB** |
 
-* With `Clientset` - 38 MB
-* With `DynamicClient` - 16 MB
-* With `kube-slim` - 14 MB
+> Measured using a minimal Go executable performing a simple API call. See [size-matters](https://github.com/amorey/size-matters) for methodology.
 
-This library is very much a work in progress and we welcome your help! 
+This library is a work in progress and we welcome contributions!
 
 ## Installation
 
