@@ -2,10 +2,10 @@ module basic-usage
 
 go 1.25.3
 
-replace github.com/kubetail-org/kube-slim => ../../
+replace github.com/kubetail-org/kubeslim => ../../
 
 require (
-	github.com/kubetail-org/kube-slim v0.0.0-00010101000000-000000000000
+	github.com/kubetail-org/kubeslim v0.0.0-00010101000000-000000000000
 	k8s.io/apimachinery v0.35.0
 	k8s.io/client-go v0.35.0
 )

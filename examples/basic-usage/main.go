@@ -6,7 +6,7 @@ import (
 	"log"
 	"path/filepath"
 
-	slim "github.com/kubetail-org/kube-slim"
+	"github.com/kubetail-org/kubeslim"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
@@ -37,16 +37,16 @@ func main() {
 		log.Fatalf("failed to load kubeconfig: %v", err)
 	}
 
-	// Create the kube-slim client
-	client, err := slim.NewForConfig(config)
+	// Create the kubeslim client
+	client, err := kubeslim.NewForConfig(config)
 	if err != nil {
-		log.Fatalf("failed to create kube-slim client: %v", err)
+		log.Fatalf("failed to create kubeslim client: %v", err)
 	}
 
 	// Get namespaces
 	namespaceGVR := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "namespaces"}
 
-	namespaces, err := slim.List[namespaceList](context.TODO(), client, namespaceGVR)
+	namespaces, err := kubeslim.List[namespaceList](context.TODO(), client, namespaceGVR)
 	if err != nil {
 		log.Fatalf("failed to list namespaces: %v", err)
 	}
@@ -63,7 +63,7 @@ func main() {
 	// Get pods
 	podGVR := schema.GroupVersionResource{Group: "core", Version: "v1", Resource: "pods"}
 
-	pods, err := slim.List[podList](context.TODO(), client, podGVR)
+	pods, err := kubeslim.List[podList](context.TODO(), client, podGVR)
 	if err != nil {
 		log.Fatalf("failed to list pods: %v", err)
 	}

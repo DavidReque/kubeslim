@@ -1,4 +1,4 @@
-module github.com/kubetail-org/kube-slim
+module github.com/kubetail-org/kubeslim
 
 go 1.25.3
 
