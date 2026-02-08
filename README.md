@@ -6,7 +6,7 @@ _An alternative to K8s client-go optimized for binary size, memory consumption a
 
 ## Introduction
 
-While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the Kubernetes [client-go](https://github.com/kubernetes/client-go) library, which typically adds 20MB+ to final binaries (see our [`size-matters`]((https://github.com/amorey/size-matters) report). We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
+While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the Kubernetes [client-go](https://github.com/kubernetes/client-go) library, which typically adds 20MB+ to final binaries (see our [`size-matters`](https://github.com/amorey/size-matters) report). We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
 
 | Client | Binary Size¹ |
 |---|---|
