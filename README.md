@@ -6,7 +6,7 @@ _An alternative to K8s client-go optimized for binary size, memory consumption a
 
 ## Introduction
 
-**kubeslim** is a Go library designed as a lightweight, performant alternative to Kubernetes [client-go](https://github.com/kubernetes/client-go). While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the [Kubernetes client-go library](https://github.com/amorey/size-matters), which typically adds 20MB+ to final binaries. We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
+While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the [Kubernetes client-go library](https://github.com/amorey/size-matters), which typically adds 20MB+ to final binaries. We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
 
 | Client | Binary Size¹ |
 |---|---|
