@@ -2,6 +2,9 @@
 
 _kube-slim is a Kubernetes client library for Go optimized for runtime performance and final binary size_
 
+<img width="217" height="317" alt="gopher-slim" src="https://github.com/user-attachments/assets/76a56ea2-652e-41d8-b60d-c768ba35d520" />
+
+
 ## Introduction
 
 While working on the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool we noticed that our final binary size and that of other tools in the K8s ecosystem (e.g. `kubectl`, `helm`) was large compared to other unix utilities and we traced the problem to the [Kubernetes client-go library](https://github.com/amorey/size-matters) which typically adds 20MB+ to final binaries. We also noticed other issues with `client-go` such as large memory consumption with informers. This library is an attempt to fix those issues by starting fresh and designing a library that's optimized for speed, memory consumption and binary size.
