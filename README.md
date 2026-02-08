@@ -6,7 +6,7 @@ _An alternative to K8s client-go optimized for binary size, memory consumption a
 
 ## Introduction
 
-While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the Kubernetes [client-go](https://github.com/kubernetes/client-go) library, which typically adds 20MB+ to final binaries (see our [`size-matters`](https://github.com/amorey/size-matters) report). We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
+While building the [`kubetail`](https://github.com/kubetail-org/kubetail) CLI tool, we noticed that final binary sizes for tools in the K8s ecosystem (e.g. `kubectl`, `helm`) were disproportionately large compared to other unix utilities. We traced the root cause to the Kubernetes [client-go](https://github.com/kubernetes/client-go) library, which typically adds 20MB+ to final binaries (see our [size-matters](https://github.com/amorey/size-matters) report). We also found that `client-go` informers consume significant amounts of memory at runtime. This library addresses both issues with a design optimized for binary size, memory consumption, and speed.
 
 | Client | Binary Size¹ |
 |---|---|
@@ -33,26 +33,26 @@ import (
 	"log"
 	"path/filepath"
 
-  "github.com/kubetail-org/kubeslim"
+	"github.com/kubetail-org/kubeslim"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
 )
 
 type namespaceList struct {
-  Items []struct {
-    Metadata struct {
-      Name string `json:"name"`
-    } `json:"metadata"`
-  } `json:"items"`
+	Items []struct {
+		Metadata struct {
+			Name string `json:"name"`
+		} `json:"metadata"`
+	} `json:"items"`
 }
 
 type podList struct {
-  Items []struct {
-    Metadata struct {
-      Name string `json:"name"`
-    } `json:"metadata"`
-  } `json:"items"`
+	Items []struct {
+    	Metadata struct {
+			Name string `json:"name"`
+		} `json:"metadata"`
+	} `json:"items"`
 }
 
 func main() {
@@ -70,8 +70,8 @@ func main() {
 		log.Fatalf("failed to create kubeslim client: %v", err)
 	}
 
-  // Get namespaces
-  namespaceGVR := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "namespaces"}
+	// Get namespaces
+	namespaceGVR := schema.GroupVersionResource{Group: "", Version: "v1", Resource: "namespaces"}
 
 	namespaces, err := kubeslim.List[namespaceList](context.TODO(), client, namespaceGVR)
 	if err != nil {
@@ -87,8 +87,8 @@ func main() {
 		fmt.Println(ns.Metadata.Name)
 	}
 
-  // Get pods
-  podGVR := schema.GroupVersionResource{Group: "core", Version: "v1", Resource: "pods"}
+	// Get pods
+	podGVR := schema.GroupVersionResource{Group: "core", Version: "v1", Resource: "pods"}
 
 	pods, err := kubeslim.List[podList](context.TODO(), client, podGVR)
 	if err != nil {
