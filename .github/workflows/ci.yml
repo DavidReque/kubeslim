@@ -12,21 +12,37 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        go:
+          - "1.23.x"
+          - "1.24.x"
+          - "1.25.x"
+          - "1.26.x"
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-environment
         with:
           setup-go: "true"
+          go-version: ${{ matrix.go }}
       - name: Run linter
         run: test -z "$(gofmt -l .)"
 
   vet:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        go:
+          - "1.23.x"
+          - "1.24.x"
+          - "1.25.x"
+          - "1.26.x"
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-environment
         with:
           setup-go: "true"
+          go-version: ${{ matrix.go }}
       - name: Perform static analysis
         run: go vet ./...
 
@@ -34,6 +50,11 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
+        go:
+          - "1.23.x"
+          - "1.24.x"
+          - "1.25.x"
+          - "1.26.x"
         os:
           - linux
           - macos-15
@@ -73,6 +94,7 @@ jobs:
       - uses: ./.github/actions/setup-environment
         with:
           setup-go: "true"
+          go-version: ${{ matrix.go }}
       - name: Run tests
         run: go test ./...
       - name: Run race tests
@@ -87,6 +109,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        go:
+          - "1.23.x"
+          - "1.24.x"
+          - "1.25.x"
+          - "1.26.x"
         arch:
           - x86
           - armhf
@@ -118,6 +145,7 @@ jobs:
       - uses: ./.github/actions/setup-environment
         with:
           setup-go: "true"
+          go-version: ${{ matrix.go }}
       - name: Setup Alpine
         uses: jirutka/setup-alpine@v1
         with:
